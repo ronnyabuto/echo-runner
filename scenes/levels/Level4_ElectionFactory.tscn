@@ -1,0 +1,163 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2xp1pxmflajp"]
+
+[ext_resource type="Script" path="res://scripts/core/base_level.gd" id="1_level"]
+[ext_resource type="PackedScene" uid="uid://crkxbv4yo63rn" path="res://scenes/collectibles/VoiceCollectible.tscn" id="2_collectible"]
+[ext_resource type="PackedScene" uid="uid://dumqjav7rj0kh" path="res://scenes/bosses/MachineCandidate.tscn" id="3_boss"]
+[ext_resource type="PackedScene" uid="uid://dgnm22w7h66ab" path="res://scenes/ui/HUD.tscn" id="4_hud"]
+[ext_resource type="PackedScene" uid="uid://du3wv6ocvwuah" path="res://scenes/ui/PauseMenu.tscn" id="5_pause"]
+[ext_resource type="PackedScene" uid="uid://bw6iiw43k02m3" path="res://scenes/ui/LevelComplete.tscn" id="6_complete"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(80, 100)
+
+[node name="Level4_ElectionFactory" type="Node2D"]
+script = ExtResource("1_level")
+level_name = "Election Factory"
+time_limit = 0.0
+collectible_goal = 8
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(200, 550)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(640, 650)
+shape = SubResource("RectangleShape2D_1")
+scale = Vector2(32, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Ground"]
+offset_top = 620.0
+offset_right = 1280.0
+offset_bottom = 680.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="ArenaFloor" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaFloor"]
+position = Vector2(640, 480)
+shape = SubResource("RectangleShape2D_1")
+scale = Vector2(14, 0.5)
+
+[node name="ColorRect" type="ColorRect" parent="ArenaFloor"]
+offset_left = 80.0
+offset_top = 455.0
+offset_right = 1200.0
+offset_bottom = 505.0
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(50, 300)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("RectangleShape2D_1"]
+scale = Vector2(0.5, 6)
+
+[node name="ColorRect" type="ColorRect" parent="LeftWall"]
+offset_left = -20.0
+offset_top = -300.0
+offset_right = 20.0
+offset_bottom = 300.0
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1230, 300)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RectangleShape2D_1")
+scale = Vector2(0.5, 6)
+
+[node name="ColorRect" type="ColorRect" parent="RightWall"]
+offset_left = -20.0
+offset_top = -300.0
+offset_right = 20.0
+offset_bottom = 300.0
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(300, 350)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
+shape = SubResource("RectangleShape2D_1")
+scale = Vector2(2, 0.5)
+
+[node name="ColorRect" type="ColorRect" parent="Platform1"]
+offset_left = -80.0
+offset_top = -25.0
+offset_right = 80.0
+offset_bottom = 25.0
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(980, 350)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+shape = SubResource("RectangleShape2D_1")
+scale = Vector2(2, 0.5)
+
+[node name="ColorRect" type="ColorRect" parent="Platform2"]
+offset_left = -80.0
+offset_top = -25.0
+offset_right = 80.0
+offset_bottom = 25.0
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Boss" parent="." instance=ExtResource("3_boss")]
+position = Vector2(640, 200)
+
+[node name="Collectibles" type="Node2D" parent="."]
+
+[node name="Voice1" parent="Collectibles" instance=ExtResource("2_collectible")]
+position = Vector2(200, 400)
+
+[node name="Voice2" parent="Collectibles" instance=ExtResource("2_collectible")]
+position = Vector2(400, 280)
+
+[node name="Voice3" parent="Collectibles" instance=ExtResource("2_collectible")]
+position = Vector2(640, 550)
+
+[node name="Voice4" parent="Collectibles" instance=ExtResource("2_collectible")]
+position = Vector2(880, 280)
+
+[node name="Voice5" parent="Collectibles" instance=ExtResource("2_collectible")]
+position = Vector2(1080, 400)
+
+[node name="LevelExit" type="Area2D" parent="."]
+position = Vector2(640, 100)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit"]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="ExitVisual" type="ColorRect" parent="LevelExit"]
+visible = false
+offset_left = -40.0
+offset_top = -50.0
+offset_right = 40.0
+offset_bottom = 50.0
+color = Color(0.2, 1, 0.4, 0.6)
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -10
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_pause")]
+
+[node name="LevelComplete" parent="." instance=ExtResource("6_complete")]

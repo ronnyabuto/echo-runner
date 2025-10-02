@@ -1,0 +1,197 @@
+[gd_scene load_steps=9 format=3 uid="uid://bys6eow1hnt7s"]
+
+[ext_resource type="Script" path="res://scripts/core/base_level.gd" id="1_level"]
+[ext_resource type="PackedScene" uid="uid://crkxbv4yo63rn" path="res://scenes/collectibles/VoiceCollectible.tscn" id="2_collectible"]
+[ext_resource type="PackedScene" uid="uid://bcvq7nxkgmh2q" path="res://scenes/enemies/BaseEnemy.tscn" id="3_enemy"]
+[ext_resource type="PackedScene" uid="uid://dgnm22w7h66ab" path="res://scenes/ui/HUD.tscn" id="4_hud"]
+[ext_resource type="PackedScene" uid="uid://du3wv6ocvwuah" path="res://scenes/ui/PauseMenu.tscn" id="5_pause"]
+[ext_resource type="PackedScene" uid="uid://bw6iiw43k02m3" path="res://scenes/ui/LevelComplete.tscn" id="6_complete"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(80, 100)
+
+[sub_resource type="Animation" id="Animation_move"]
+resource_name = "move"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(400, 300), Vector2(400, 500), Vector2(400, 300)]
+}
+
+[node name="Level2_MediaMaze" type="Node2D"]
+script = ExtResource("1_level")
+level_name = "Media Maze"
+time_limit = 200.0
+collectible_goal = 20
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(100, 600)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(640, 650)
+shape = SubResource("RectangleShape2D_1")
+scale = Vector2(32, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Ground"]
+offset_top = 620.0
+offset_right = 1280.0
+offset_bottom = 680.0
+color = Color(0.3, 0.25, 0.35, 1)
+
+[node name="MovingPlatform1" type="AnimatableBody2D" parent="."]
+position = Vector2(400, 300)
+collision_layer = 8
+collision_mask = 0
+sync_to_physics = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform1"]
+shape = SubResource("RectangleShape2D_1")
+scale = Vector2(2, 0.5)
+
+[node name="ColorRect" type="ColorRect" parent="MovingPlatform1"]
+offset_left = -80.0
+offset_top = -25.0
+offset_right = 80.0
+offset_bottom = 25.0
+color = Color(0.6, 0.4, 0.8, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform1"]
+autoplay = "move"
+libraries = {
+"": SubResource("Animation_move")
+}
+
+[node name="MovingPlatform2" type="AnimatableBody2D" parent="."]
+position = Vector2(700, 450)
+collision_layer = 8
+collision_mask = 0
+sync_to_physics = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform2"]
+shape = SubResource("RectangleShape2D_1")
+scale = Vector2(2, 0.5)
+
+[node name="ColorRect" type="ColorRect" parent="MovingPlatform2"]
+offset_left = -80.0
+offset_top = -25.0
+offset_right = 80.0
+offset_bottom = 25.0
+color = Color(0.6, 0.4, 0.8, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform2"]
+autoplay = "move"
+libraries = {
+"": SubResource("Animation_move")
+}
+
+[node name="StaticPlatform1" type="StaticBody2D" parent="."]
+position = Vector2(250, 480)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticPlatform1"]
+shape = SubResource("RectangleShape2D_1")
+scale = Vector2(2, 0.5)
+
+[node name="ColorRect" type="ColorRect" parent="StaticPlatform1"]
+offset_left = -80.0
+offset_top = -25.0
+offset_right = 80.0
+offset_bottom = 25.0
+color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="StaticPlatform2" type="StaticBody2D" parent="."]
+position = Vector2(900, 350)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticPlatform2"]
+shape = SubResource("RectangleShape2D_1")
+scale = Vector2(2, 0.5)
+
+[node name="ColorRect" type="ColorRect" parent="StaticPlatform2"]
+offset_left = -80.0
+offset_top = -25.0
+offset_right = 80.0
+offset_bottom = 25.0
+color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="Collectibles" type="Node2D" parent="."]
+
+[node name="Voice1" parent="Collectibles" instance=ExtResource("2_collectible")]
+position = Vector2(250, 400)
+
+[node name="Voice2" parent="Collectibles" instance=ExtResource("2_collectible")]
+position = Vector2(400, 220)
+
+[node name="Voice3" parent="Collectibles" instance=ExtResource("2_collectible")]
+position = Vector2(550, 380)
+
+[node name="Voice4" parent="Collectibles" instance=ExtResource("2_collectible")]
+position = Vector2(700, 370)
+
+[node name="Voice5" parent="Collectibles" instance=ExtResource("2_collectible")]
+position = Vector2(850, 560)
+
+[node name="Voice6" parent="Collectibles" instance=ExtResource("2_collectible")]
+position = Vector2(1000, 270)
+
+[node name="Voice7" parent="Collectibles" instance=ExtResource("2_collectible")]
+position = Vector2(320, 550)
+
+[node name="Voice8" parent="Collectibles" instance=ExtResource("2_collectible")]
+position = Vector2(600, 500)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy1" parent="Enemies" instance=ExtResource("3_enemy")]
+position = Vector2(500, 570)
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource("3_enemy")]
+position = Vector2(800, 570)
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource("3_enemy")]
+position = Vector2(950, 300)
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource("3_enemy")]
+position = Vector2(350, 430)
+
+[node name="LevelExit" type="Area2D" parent="."]
+position = Vector2(1150, 280)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit"]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="ExitVisual" type="ColorRect" parent="LevelExit"]
+offset_left = -40.0
+offset_top = -50.0
+offset_right = 40.0
+offset_bottom = 50.0
+color = Color(0.2, 1, 0.4, 0.6)
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -10
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.2, 0.15, 0.25, 1)
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_pause")]
+
+[node name="LevelComplete" parent="." instance=ExtResource("6_complete")]

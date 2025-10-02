@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4hf2y2ggj3w5"]
+
+[ext_resource type="Script" path="res://scripts/bosses/cash_projectile.gd" id="1_cash"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(20, 20)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1"]
+size = Vector2(20, 20)
+
+[node name="CashProjectile" type="Area2D"]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_cash")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.3, 1, 0.3, 1)
+texture = SubResource("PlaceholderTexture2D_1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")
