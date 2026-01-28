@@ -202,7 +202,3 @@ python -m http.server 8000
 - Code: Full GDScript implementation
 - Art: Placeholder (ready for asset replacement)
 - Audio: Placeholder (ready for audio assets)
-
-## License
-
-Replace placeholder assets with final art.
